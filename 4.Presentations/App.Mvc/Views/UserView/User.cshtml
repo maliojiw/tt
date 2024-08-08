@@ -1,0 +1,174 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "User";
+}
+
+<div class="modal fade" id="UserModel" style="z-index:1500" tabindex="-1" role="dialog" aria-labelledby="UserModelLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="UserModelLabel">บันทึกข้อมูล User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+<input class="form-control" type="hidden" id="User_id" />
+
+<div class='row'></div>
+<div class='row'></div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_nickname" for="User_nickname">ชื่อเรียก</label>
+	    <input class="form-control" type="text" id="User_nickname" iLabel="ชื่อเรียก" iRequire="true" iGroup="User"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_fullname" for="User_fullname">ชื่อเต็ม</label>
+	    <input class="form-control" type="text" id="User_fullname" iLabel="ชื่อเต็ม" iRequire="true" iGroup="User"  />
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_phone" for="User_phone">โทรศัพท์</label>
+	    <input class="form-control" type="text" id="User_phone" iLabel="โทรศัพท์" iRequire="true" iGroup="User"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_email" for="User_email">อีเมล/username</label>
+	    <input class="form-control" type="text" id="User_email" iLabel="อีเมล/username" iRequire="true" iGroup="User"  />
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_password" for="User_password">รหัสผ่าน</label>
+	    <input class="form-control" type="text" id="User_password" iLabel="รหัสผ่าน" iRequire="true" iGroup="User"  />
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_isAdmin" for="User_isAdmin">เป็น Admin</label>
+	    <input class="form-control" type="checkbox" id="User_isAdmin"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_isWorker" for="User_isWorker">เป็น เจ้าหน้าที่ภาคสนาม</label>
+	    <input class="form-control" type="checkbox" id="User_isWorker"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_isResearcher" for="User_isResearcher">เป็น นักวิจัย</label>
+	    <input class="form-control" type="checkbox" id="User_isResearcher"  />
+    </div>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:User_PutUpdate()">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">User</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+        
+                        <div class="form-group col-md-3">
+                            <label id='lab_s_User_nickname' for='s_User_nickname'>ชื่อเรียก</label>
+                            <input class="form-control" type="text" id="s_User_nickname" iLabel="ชื่อเรียก" iRequire="true" iGroup="s_User" title='ชื่อเรียก' placeholder='ชื่อเรียก' />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label id='lab_s_User_phone' for='s_User_phone'>โทรศัพท์</label>
+                            <input class="form-control" type="text" id="s_User_phone" iLabel="โทรศัพท์" iRequire="true" iGroup="s_User" title='โทรศัพท์' placeholder='โทรศัพท์' />
+                        </div>
+
+
+                    <div class="form-group col-sm-3">
+                        <button class="btn btn-info" onclick="javascript:User_DoSearch();"><i class="fa fa-search" style="font-size: 14px;"></i> ค้นหา</button>
+                        <button class="btn btn-info" onclick="javascript:User_GoCreate();"><i class="fa fa-plus" style="font-size: 14px;"></i> เพิ่มรายการ</button>
+                        <button style="display:none;" class="btn btn-info" onclick="javascript:User_GetSelect('id');">ดึงตัวเลือก</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="UserTable" class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <!--<th>เลือก</th>-->
+                                    <th>เครื่องมือ</th>
+            <th><label id='h_User_nickname'>ชื่อเรียก</label></th>
+            <th><label id='h_User_fullname'>ชื่อเต็ม</label></th>
+            <th><label id='h_User_phone'>โทรศัพท์</label></th>
+            <th><label id='h_User_email'>อีเมล/username</label></th>
+            <th><label id='h_User_isAdmin'>เป็น Admin</label></th>
+            <th><label id='h_User_isWorker'>เป็น เจ้าหน้าที่ภาคสนาม</label></th>
+            <th><label id='h_User_isResearcher'>เป็น นักวิจัย</label></th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/User/User.js"></script>
+    <script>
+        $(document).ready(function () {
+            User_InitiateDataTable();
+            User_InitialForm();
+            SetupValidationRemark("User");
+        });
+    </script>
+}
+

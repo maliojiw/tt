@@ -1,0 +1,159 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "ActionHistory";
+}
+
+<div class="modal fade" id="ActionHistoryModel" style="z-index:1500" tabindex="-1" role="dialog" aria-labelledby="ActionHistoryModelLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ActionHistoryModelLabel">บันทึกข้อมูล ActionHistory</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+<input class="form-control" type="hidden" id="ActionHistory_id" />
+
+<div class='row'></div>
+<div class='row'></div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_ActionHistory_actionDate" for="ActionHistory_actionDate">วันที่ทำ กิจกรรม</label>
+	    <input class="form-control" type="text" id="ActionHistory_actionDate" data-provide="datepicker" data-date-language="th-th" iLabel="วันที่ทำ กิจกรรม" iRequire="true" iGroup="ActionHistory"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_ActionHistory_userId" for="ActionHistory_userId">ผู้ให้ข้อมูล</label>
+	    <select class="form-control" id="ActionHistory_userId" iLabel="ผู้ให้ข้อมูล" iRequire="true" iGroup="ActionHistory" ></select>
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_ActionHistory_actionId" for="ActionHistory_actionId">ประเภทกิจกรรม</label>
+	    <select class="form-control" id="ActionHistory_actionId" iLabel="ประเภทกิจกรรม" iRequire="true" iGroup="ActionHistory" ></select>
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-12">
+	    <label id="lab_ActionHistory_note" for="ActionHistory_note">รายละเอียดเพิ่มเติม</label>
+	    <textarea  class="form-control" rows="4" cols="50" id="ActionHistory_note" iLabel="รายละเอียดเพิ่มเติม" iRequire="true" iGroup="ActionHistory" ></textarea>
+    </div>
+</div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:ActionHistory_PutUpdate()">บันทึก</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">ActionHistory</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+        
+                        <div class="form-group col-md-3">
+                            <label id='lab_s_ActionHistory_actionDate' for='s_ActionHistory_actionDate'>วันที่ทำ กิจกรรม</label>
+                            <input class="form-control" type="text" id="s_ActionHistory_actionDate" data-provide="datepicker" data-date-language="th-th" iLabel="วันที่ทำ กิจกรรม" iRequire="true" iGroup="s_ActionHistory" title='วันที่ทำ กิจกรรม' placeholder='วันที่ทำ กิจกรรม' />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label id='lab_s_ActionHistory_note' for='s_ActionHistory_note'>รายละเอียดเพิ่มเติม</label>
+                            <textarea  class="form-control" rows="4" cols="50" id="s_ActionHistory_note" iLabel="รายละเอียดเพิ่มเติม" iRequire="true" iGroup="s_ActionHistory" title='รายละเอียดเพิ่มเติม' placeholder='รายละเอียดเพิ่มเติม'></textarea>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label id='lab_s_ActionHistory_userId' for='s_ActionHistory_userId'>ผู้ให้ข้อมูล</label>
+                            <select class="form-control" id="s_ActionHistory_userId" iLabel="ผู้ให้ข้อมูล" iRequire="true" iGroup="s_ActionHistory" title='ผู้ให้ข้อมูล' placeholder='ผู้ให้ข้อมูล'></select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label id='lab_s_ActionHistory_actionId' for='s_ActionHistory_actionId'>ประเภทกิจกรรม</label>
+                            <select class="form-control" id="s_ActionHistory_actionId" iLabel="ประเภทกิจกรรม" iRequire="true" iGroup="s_ActionHistory" title='ประเภทกิจกรรม' placeholder='ประเภทกิจกรรม'></select>
+                        </div>
+
+
+                    <div class="form-group col-sm-3">
+                        <button class="btn btn-info" onclick="javascript:ActionHistory_DoSearch();"><i class="fa fa-search" style="font-size: 14px;"></i> ค้นหา</button>
+                        <button class="btn btn-info" onclick="javascript:ActionHistory_GoCreate();"><i class="fa fa-plus" style="font-size: 14px;"></i> เพิ่มรายการ</button>
+                        <button style="display:none;" class="btn btn-info" onclick="javascript:ActionHistory_GetSelect('id');">ดึงตัวเลือก</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="ActionHistoryTable" class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <!--<th>เลือก</th>-->
+                                    <th>เครื่องมือ</th>
+            <th><label id='h_ActionHistory_actionDate'>วันที่ทำ กิจกรรม</label></th>
+            <th><label id='h_ActionHistory_note'>รายละเอียดเพิ่มเติม</label></th>
+            <th><label id='h_ActionHistory_userId'>ผู้ให้ข้อมูล</label></th>
+            <th><label id='h_ActionHistory_actionId'>ประเภทกิจกรรม</label></th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/ActionHistory/ActionHistory.js"></script>
+    <script>
+        $(document).ready(function () {
+            ActionHistory_InitiateDataTable();
+            ActionHistory_InitialForm();
+            SetupValidationRemark("ActionHistory");
+        });
+    </script>
+}
+

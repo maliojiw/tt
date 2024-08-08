@@ -1,0 +1,117 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "User";
+    Layout = "_LayoutDirect";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">User</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">       
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">บันทึกข้อมูล User</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+	<input class="form-control" type="hidden" id="User_id" />
+
+<div class='row'></div>
+<div class='row'></div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_nickname" for="User_nickname">ชื่อเรียก</label>
+	    <input class="form-control" type="text" id="User_nickname" iLabel="ชื่อเรียก" iRequire="false" iGroup="User"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_fullname" for="User_fullname">ชื่อเต็ม</label>
+	    <input class="form-control" type="text" id="User_fullname" iLabel="ชื่อเต็ม" iRequire="false" iGroup="User"  />
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_phone" for="User_phone">โทรศัพท์</label>
+	    <input class="form-control" type="text" id="User_phone" iLabel="โทรศัพท์" iRequire="false" iGroup="User"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_email" for="User_email">อีเมล/username</label>
+	    <input class="form-control" type="text" id="User_email" iLabel="อีเมล/username" iRequire="false" iGroup="User"  />
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_password" for="User_password">รหัสผ่าน</label>
+	    <input class="form-control" type="text" id="User_password" iLabel="รหัสผ่าน" iRequire="false" iGroup="User"  />
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_User_isAdmin" for="User_isAdmin">เป็น Admin</label>
+	    <input class="form-control" type="checkbox" id="User_isAdmin"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_isWorker" for="User_isWorker">เป็น เจ้าหน้าที่ภาคสนาม</label>
+	    <input class="form-control" type="checkbox" id="User_isWorker"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_User_isResearcher" for="User_isResearcher">เป็น นักวิจัย</label>
+	    <input class="form-control" type="checkbox" id="User_isResearcher"  />
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" class="btn btn-default" onclick="javascript:window_close()" style="background-color: #fff;">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:User_PutUpdate()">บันทึก</button>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/User/User_d.js"></script>
+    <script>
+        $(document).ready(function () {
+            var id = getUrlParameter("id");
+            if (id) {
+                User_SetEditForm(id);
+            } else {
+                User_SetCreateForm();
+            }
+            SetupValidationRemark("User");
+        });
+    </script>
+}
+

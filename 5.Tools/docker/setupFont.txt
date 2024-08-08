@@ -1,0 +1,4 @@
+docker cp "TH Sarabun New.jar" jasperserver:/bitnami/tomcat/webapps/jasperserver/WEB-INF/lib
+docker cp "TH SarabunPSK.jar" jasperserver:/bitnami/tomcat/webapps/jasperserver/WEB-INF/lib
+docker compose stop
+docker compose start

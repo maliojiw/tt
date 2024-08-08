@@ -1,0 +1,106 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "FoundHistory";
+    Layout = "_LayoutDirect";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">FoundHistory</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">       
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">บันทึกข้อมูล FoundHistory</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+	<input class="form-control" type="hidden" id="FoundHistory_id" />
+
+<div class='row'></div>
+<div class='row'></div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_FoundHistory_foundDate" for="FoundHistory_foundDate">วันที่พบ</label>
+	    <input class="form-control" type="text" id="FoundHistory_foundDate" data-provide="datepicker" data-date-language="th-th" iLabel="วันที่พบ" iRequire="false" iGroup="FoundHistory"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_FoundHistory_userId" for="FoundHistory_userId">ผู้ให้ข้อมูล</label>
+	    <select class="form-control" id="FoundHistory_userId" iLabel="ผู้ให้ข้อมูล" iRequire="false" iGroup="FoundHistory" ></select>
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_FoundHistory_placeId" for="FoundHistory_placeId">ตำแหน่งที่พบ</label>
+	    <select class="form-control" id="FoundHistory_placeId" iLabel="ตำแหน่งที่พบ" iRequire="false" iGroup="FoundHistory" ></select>
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_FoundHistory_countTypeId" for="FoundHistory_countTypeId">วิธีนับจำนวน</label>
+	    <select class="form-control" id="FoundHistory_countTypeId" iLabel="วิธีนับจำนวน" iRequire="false" iGroup="FoundHistory" ></select>
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_FoundHistory_totalFound" for="FoundHistory_totalFound">จำนวนที่พบ</label>
+	    <select class="form-control" id="FoundHistory_totalFound" iLabel="จำนวนที่พบ" iRequire="false" iGroup="FoundHistory" ></select>
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-12">
+	    <label id="lab_FoundHistory_note" for="FoundHistory_note">รายละเอียดเพิ่มเติม</label>
+	    <textarea  class="form-control" rows="4" cols="50" id="FoundHistory_note" iLabel="รายละเอียดเพิ่มเติม" iRequire="false" iGroup="FoundHistory" ></textarea>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" class="btn btn-default" onclick="javascript:window_close()" style="background-color: #fff;">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:FoundHistory_PutUpdate()">บันทึก</button>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/FoundHistory/FoundHistory_d.js"></script>
+    <script>
+        $(document).ready(function () {
+            var id = getUrlParameter("id");
+            if (id) {
+                FoundHistory_SetEditForm(id);
+            } else {
+                FoundHistory_SetCreateForm();
+            }
+            SetupValidationRemark("FoundHistory");
+        });
+    </script>
+}
+

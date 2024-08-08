@@ -1,0 +1,67 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "User";
+    Layout = "_LayoutPivot";
+}
+
+<!-- Content Header (Page header) -->
+@section HeadPanelPlaceHolder{
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1>Pivot User</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                <li class="breadcrumb-item">Pivot User</li>
+            </ol>
+        </div>
+    </div>
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="form-group col-sm-12">
+                        <button class="btn btn-info" onclick="javascript:exportPdfFile();"><i class="fa fa-search" style="font-size: 14px;"></i> Print PDF</button>
+                        <button class="btn btn-info" onclick="javascript:exportExcelFile();"><i class="fa fa-search" style="font-size: 14px;"></i> Export Excel</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="UserPivot" style="overflow-x: auto;"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+
+<!-- /.content -->
+@section FooterPlaceHolder{
+    <script src="~/js/User/User_pivot.js"></script>
+    <script>
+        $(document).ready(function () {
+            User_InitiatePivotTable();
+        });
+    </script>
+}
+

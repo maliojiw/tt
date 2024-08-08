@@ -1,0 +1,94 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "User";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">User</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">จัดการ User</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" onclick="javascript:User_Add()">
+                            <i class="fa fa-plus"></i> เพิ่มรายการ
+                        </button>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="UserTable" class="display table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับ</th>
+<th><label id='h_User_nickname'>ชื่อเรียก</label></th>
+<th><label id='h_User_fullname'>ชื่อเต็ม</label></th>
+<th><label id='h_User_phone'>โทรศัพท์</label></th>
+<th><label id='h_User_email'>อีเมล/username</label></th>
+<th><label id='h_User_password'>รหัสผ่าน</label></th>
+<th><label id='h_User_isAdmin'>เป็น Admin</label></th>
+<th><label id='h_User_isWorker'>เป็น เจ้าหน้าที่ภาคสนาม</label></th>
+<th><label id='h_User_isResearcher'>เป็น นักวิจัย</label></th>
+
+                                    <th>กิจกรรม</th>
+                                </tr>
+                            </thead>
+                            <tbody class="thin-border-bottom" id="UserBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:User_Save(getUrlParameter('id'))">บันทึก</button>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/User/User_inline.js"></script>
+    <script>
+        $(document).ready(function () {
+            //var id = getUrlParameter("id");
+            //if (id) {
+            //    User_InitialForm(id);
+            //}
+            User_InitialForm('');
+        });
+
+        $(document).on("change", ".input_score", function () {
+            User_Summary();
+        });
+    </script>
+}

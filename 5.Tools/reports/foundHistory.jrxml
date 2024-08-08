@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12609316-3a1e-47ac-97d7-f668a61e6b44">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IkZvdW5kSGlzdG9yeXMiIEFTICwyMjEsNDcsNjZkMTJiNjUtMWI3OC00Y2NjLTg4ZjMtMmY0YzM1
+Zjc1NWE2OyJQbGFjZXMiIEFTICw1NjMsNDQsYTZiNTU5MGUtODFkZi00N2E4LWJjYWUtMzk4N2Nh
+ZmFjN2IyOyJDb3VudEdyb3VwcyIgQVMgLDg5LDcxLGM5OWFjYzJmLTM4YTEtNGM1OC1iYjYwLTdi
+NzUxMmU5MDhlODsiQ291bnRUeXBlcyIgQVMgLDc3MiwxMjcsMjBmODM1YmMtZGRmNi00YzlmLWE2
+YjYtNmM3MDJjMTgxYTFmOyJVc2VycyIgQVMgLDQwNiwyNzksM2Y0NTk4MjItMzkxYS00M2E0LWE3
+ZTctZWRiZDkwOGE1NWI1Ow==]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="253"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="739"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FishPreventionDb"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8088/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/fishprevention/foundHistory_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/fishprevention/foundHistory"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT "FoundHistorys"."foundDate",
+	"CountTypes".name as "countTypeName",
+	"CountGroups".name as "countGroupName",
+	"FoundHistorys".note,
+	"Users".fullname,
+	"Users".nickname,
+	"Users".phone,
+	"Places"."riverName",
+	"Places"."nearbyPlace",
+	"Places".name as "placeName",
+	"Places".province,
+	"Places".amphor,
+	"Places".tumbon
+FROM "FoundHistorys"
+	INNER JOIN "Places" ON 
+	 "FoundHistorys"."placeId" = "Places".id 
+	INNER JOIN "CountGroups" ON 
+	 "FoundHistorys"."totalFound" = "CountGroups".id 
+	INNER JOIN "CountTypes" ON 
+	 "FoundHistorys"."countTypeId" = "CountTypes".id 
+	INNER JOIN "Users" ON 
+	 "FoundHistorys"."userId" = "Users".id]]>
+	</queryString>
+	<field name="foundDate" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="foundDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="foundDate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="FoundHistorys"/>
+		<fieldDescription><![CDATA[วันที่พบ]]></fieldDescription>
+	</field>
+	<field name="countTypeName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="countTypeName"/>
+		<property name="com.jaspersoft.studio.field.label" value="countTypeName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="CountTypes"/>
+	</field>
+	<field name="countGroupName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="countGroupName"/>
+		<property name="com.jaspersoft.studio.field.label" value="countGroupName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="CountGroups"/>
+	</field>
+	<field name="note" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="note"/>
+		<property name="com.jaspersoft.studio.field.label" value="note"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="FoundHistorys"/>
+		<fieldDescription><![CDATA[รายละเอียดเพิ่มเติม]]></fieldDescription>
+	</field>
+	<field name="fullname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fullname"/>
+		<property name="com.jaspersoft.studio.field.label" value="fullname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Users"/>
+		<fieldDescription><![CDATA[ชื่อเต็ม]]></fieldDescription>
+	</field>
+	<field name="nickname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nickname"/>
+		<property name="com.jaspersoft.studio.field.label" value="nickname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Users"/>
+		<fieldDescription><![CDATA[ชื่อเรียก]]></fieldDescription>
+	</field>
+	<field name="phone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="phone"/>
+		<property name="com.jaspersoft.studio.field.label" value="phone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Users"/>
+		<fieldDescription><![CDATA[โทรศัพท์]]></fieldDescription>
+	</field>
+	<field name="riverName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="riverName"/>
+		<property name="com.jaspersoft.studio.field.label" value="riverName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Places"/>
+		<fieldDescription><![CDATA[ชื่อแม่น้ำ]]></fieldDescription>
+	</field>
+	<field name="nearbyPlace" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nearbyPlace"/>
+		<property name="com.jaspersoft.studio.field.label" value="nearbyPlace"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Places"/>
+		<fieldDescription><![CDATA[สถานที่ใกล้เคียง]]></fieldDescription>
+	</field>
+	<field name="placeName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="placeName"/>
+		<property name="com.jaspersoft.studio.field.label" value="placeName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Places"/>
+	</field>
+	<field name="province" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="province"/>
+		<property name="com.jaspersoft.studio.field.label" value="province"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Places"/>
+		<fieldDescription><![CDATA[จังหวัด]]></fieldDescription>
+	</field>
+	<field name="amphor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="amphor"/>
+		<property name="com.jaspersoft.studio.field.label" value="amphor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Places"/>
+		<fieldDescription><![CDATA[อำเภอ]]></fieldDescription>
+	</field>
+	<field name="tumbon" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tumbon"/>
+		<property name="com.jaspersoft.studio.field.label" value="tumbon"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Places"/>
+		<fieldDescription><![CDATA[ตำบล]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="56e0192a-4493-4b35-b45c-00412e21df98">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5cddb4d-f57f-413d-ae2c-99554f37f396"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[foundDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="30" uuid="7b91c243-28dc-4250-b130-b1c11c79bcdb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f3615a3-2ed4-4ada-8daa-8aa26514f26c"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[countGroupName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="30" uuid="c3362830-b61e-4ac4-8842-f6d9906b4891">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c0e496f-6e25-4f69-a435-f63f15b06208"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[countTypeName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="30" uuid="35cde323-edf2-4263-bb15-01f43cc86b1a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d490a49-e417-468c-82c7-6ec1799ccbf4"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="30" uuid="0e27c794-2a9c-49c7-8db9-4f7081829979">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b9c8b98-5f74-4132-8211-96dc9cd3b2ed"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="TH SarabunPSK" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[nickname]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="71085379-a358-45fe-9520-47eae1eee29a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5cddb4d-f57f-413d-ae2c-99554f37f396"/>
+				</reportElement>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{foundDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="30" uuid="192c171b-ff34-4701-8389-03cc5b37de6c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f3615a3-2ed4-4ada-8daa-8aa26514f26c"/>
+				</reportElement>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{countGroupName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="02587cdf-aebc-4b64-a951-533af35c92bc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c0e496f-6e25-4f69-a435-f63f15b06208"/>
+				</reportElement>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{countTypeName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="30" uuid="3c759a70-062d-49f9-b065-3c5abab9c9f4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d490a49-e417-468c-82c7-6ec1799ccbf4"/>
+				</reportElement>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{note}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="30" uuid="e2036627-1aaf-4c1a-862d-0b6beb71125b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b9c8b98-5f74-4132-8211-96dc9cd3b2ed"/>
+				</reportElement>
+				<textElement>
+					<font fontName="TH SarabunPSK" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nickname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

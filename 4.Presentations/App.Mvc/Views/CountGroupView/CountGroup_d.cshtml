@@ -1,0 +1,84 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "CountGroup";
+    Layout = "_LayoutDirect";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">CountGroup</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">       
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">บันทึกข้อมูล CountGroup</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+	<input class="form-control" type="hidden" id="CountGroup_id" />
+
+<div class='row'></div>
+<div class='row'></div>
+<div class='row'>
+    <div class="form-group col-md-8">
+	    <label id="lab_CountGroup_name" for="CountGroup_name">ประมาณการ จำนวนที่พบ</label>
+	    <input class="form-control" type="text" id="CountGroup_name" iLabel="ประมาณการ จำนวนที่พบ" iRequire="false" iGroup="CountGroup"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_CountGroup_nearbyCount" for="CountGroup_nearbyCount">เทียบได้เป็นจำนวน</label>
+	    <input class="form-control" type="text" oninput="formatInputNumber(this)" id="CountGroup_nearbyCount" iLabel="เทียบได้เป็นจำนวน" iRequire="false" iGroup="CountGroup"  />
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" class="btn btn-default" onclick="javascript:window_close()" style="background-color: #fff;">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:CountGroup_PutUpdate()">บันทึก</button>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/CountGroup/CountGroup_d.js"></script>
+    <script>
+        $(document).ready(function () {
+            var id = getUrlParameter("id");
+            if (id) {
+                CountGroup_SetEditForm(id);
+            } else {
+                CountGroup_SetCreateForm();
+            }
+            SetupValidationRemark("CountGroup");
+        });
+    </script>
+}
+

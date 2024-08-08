@@ -1,0 +1,95 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "ActionHistory";
+    Layout = "_LayoutDirect";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@Configuration["SiteInformation:modulename"]</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]">หน้าแรก</a></li>
+                    <li class="breadcrumb-item "><a href="@Configuration["SiteInformation:mainsite"]@Configuration["SiteInformation:appsite"]">@Configuration["SiteInformation:modulename"]</a></li>
+                    <li class="breadcrumb-item active">ActionHistory</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">       
+
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">บันทึกข้อมูล ActionHistory</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+	<input class="form-control" type="hidden" id="ActionHistory_id" />
+
+<div class='row'></div>
+<div class='row'></div>
+<div class='row'>
+    <div class="form-group col-md-4">
+	    <label id="lab_ActionHistory_actionDate" for="ActionHistory_actionDate">วันที่ทำ กิจกรรม</label>
+	    <input class="form-control" type="text" id="ActionHistory_actionDate" data-provide="datepicker" data-date-language="th-th" iLabel="วันที่ทำ กิจกรรม" iRequire="false" iGroup="ActionHistory"  />
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_ActionHistory_userId" for="ActionHistory_userId">ผู้ให้ข้อมูล</label>
+	    <select class="form-control" id="ActionHistory_userId" iLabel="ผู้ให้ข้อมูล" iRequire="false" iGroup="ActionHistory" ></select>
+    </div>
+
+    <div class="form-group col-md-4">
+	    <label id="lab_ActionHistory_actionId" for="ActionHistory_actionId">ประเภทกิจกรรม</label>
+	    <select class="form-control" id="ActionHistory_actionId" iLabel="ประเภทกิจกรรม" iRequire="false" iGroup="ActionHistory" ></select>
+    </div>
+</div>
+<div class='row'>
+    <div class="form-group col-md-12">
+	    <label id="lab_ActionHistory_note" for="ActionHistory_note">รายละเอียดเพิ่มเติม</label>
+	    <textarea  class="form-control" rows="4" cols="50" id="ActionHistory_note" iLabel="รายละเอียดเพิ่มเติม" iRequire="false" iGroup="ActionHistory" ></textarea>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="button" class="btn btn-default" onclick="javascript:window_close()" style="background-color: #fff;">ยกเลิก</button>
+                <button type="button" class="btn btn-primary" onclick="javascript:ActionHistory_PutUpdate()">บันทึก</button>
+            </div>
+        </div>
+        <!-- /.card -->
+
+    </div><!-- /.container-fluid -->
+
+</section>
+<!-- /.content -->
+
+@section FooterPlaceHolder{
+    <script src="~/js/ActionHistory/ActionHistory_d.js"></script>
+    <script>
+        $(document).ready(function () {
+            var id = getUrlParameter("id");
+            if (id) {
+                ActionHistory_SetEditForm(id);
+            } else {
+                ActionHistory_SetCreateForm();
+            }
+            SetupValidationRemark("ActionHistory");
+        });
+    </script>
+}
+
